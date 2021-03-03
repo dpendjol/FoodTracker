@@ -10,7 +10,7 @@
 
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="{{ url_for('static', filename='bs/css/united.min.css') }}" />
-		<link rel="stylesheet" href="../static/styles.css" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='static/styles.css') }}" />
 
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -81,7 +81,7 @@
 						<div class="panel-body text-bold">
 							<i class="glyphicon glyphicon-calendar"></i> December 14, 2017 
 
-							<a class="btn btn-primary btn-xs pull-right" href="./view.html">
+							<a class="btn btn-primary btn-xs pull-right" href="{{ url_for('main.view') }}">
 								View <i class="glyphicon glyphicon-arrow-right"></i>
 							</a>
 						</div>
@@ -98,7 +98,7 @@
 						<div class="panel-body text-bold">
 							<i class="glyphicon glyphicon-calendar"></i> December 14, 2017 
 
-							<a class="btn btn-primary btn-xs pull-right" href="./view.html">
+							<a class="btn btn-primary btn-xs pull-right" href="{{ url_for('main.view') }}">
 								View <i class="glyphicon glyphicon-arrow-right"></i>
 							</a>
 						</div>
@@ -115,7 +115,7 @@
 						<div class="panel-body text-bold">
 							<i class="glyphicon glyphicon-calendar"></i> December 14, 2017 
 
-							<a class="btn btn-primary btn-xs pull-right" href="./view.html">
+							<a class="btn btn-primary btn-xs pull-right" href="{{ url_for('main.view') }}">
 								View <i class="glyphicon glyphicon-arrow-right"></i>
 							</a>
 						</div>
@@ -132,7 +132,7 @@
 						<div class="panel-body text-bold">
 							<i class="glyphicon glyphicon-calendar"></i> December 14, 2017 
 
-							<a class="btn btn-primary btn-xs pull-right" href="./view.html">
+							<a class="btn btn-primary btn-xs pull-right" href="{{ url_for('main.view') }}">
 								View <i class="glyphicon glyphicon-arrow-right"></i>
 							</a>
 						</div>

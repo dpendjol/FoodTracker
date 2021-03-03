@@ -10,7 +10,7 @@
 
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="{{ url_for('static', filename='bs/css/united.min.css') }}" />
-		<link rel="stylesheet" href="./styles.css" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
 
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -19,6 +19,15 @@
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
 	</head>
+  {% with messages = get_flashed_messages(with_categories=True) %}
+  {% if messages %}
+    <ul>
+    {% for category, message in messages %}
+      <li class="{{ category }}">{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+  {% endwith %}
 	<body>
 
 		<div class="container-fluid" id="wrapper">
@@ -34,10 +43,10 @@
 						<div class="col-lg-4 col-lg-offset-4">
 							<ul class="nav nav-pills nav-justified">
 							  <li role="presentation">
-							  	<a href=href="{{ url_for('main.index') }}" title="Home">Home</a>
+							  	<a href="{{ url_for('main.index') }}" title="Home">Home</a>
 							  </li>
 							  <li role="presentation" class="active">
-							  	<a href=href="{{ url_for('main.add') }}" title="Add Food Item">Add Food Item</a>
+							  	<a href="{{ url_for('main.add') }}" title="Add Food Item">Add Food Item</a>
 							  </li>
 							</ul>
 						</div>
@@ -54,25 +63,25 @@
 							</h3>
 							<hr />
 
-							<form action="" method="POST" role="form">
+							<form action="{{ url_for('main.add_post') }}" method="POST" role="form">
 							
 								<div class="row">
 									<div class="col-lg-4">
 										<div class="form-group">
 											<label for="food-name">Food Name</label>
-						                  	<input type="text" class="form-control" id="food-name" name="food-name" placeholder="Food Name" autofocus>
+						                  	<input type="text" class="form-control" id="food-name" name="food-name" value="{{ food.name }}" placeholder="Food Name" autofocus>
 										</div>
 									</div>
 									<div class="col-lg-4">
 										<div class="form-group">
 						                  <label for="protein">Protein</label>
-						                  <input type="number" class="form-control" id="protein" name="protein" placeholder="Protein">
+						                  <input type="number" class="form-control" id="protein" name="protein" value="{{ food.protein }}" placeholder="Protein">
 						                </div>
 									</div>
 									<div class="col-lg-4">
 										<div class="form-group">
 						                  <label for="carbohydrates">Carbohydrates</label>
-						                  <input type="number" class="form-control" id="carbohydrates" name="carbohydrates" placeholder="Carbohydrates">
+						                  <input type="number" class="form-control" id="carbohydrates" name="carbohydrates" value="{{ food.carbs }}" placeholder="Carbohydrates">
 						                </div>
 									</div>
 								</div>
@@ -81,12 +90,13 @@
 									<div class="col-lg-4">
 										<div class="form-group">
 						                  <label for="fat">Fat</label>
-						                  <input type="number" class="form-control" id="fat" name="fat" placeholder="Fat">
+						                  <input type="number" class="form-control" id="fat" name="fat" value="{{ food.fats }}" placeholder="Fat">
 						                </div>
 									</div>
 
 									<div class="col-lg-4">
 										<div class="form-group">
+                      <input type="hidden" name="food-id" value="{{ food.id }}" />
 											<label style="visibility:hidden">submit</label>
 											<button type="submit" class="btn btn-primary btn-block">
 												<i class="glyphicon glyphicon-upload"></i> Submit
@@ -123,30 +133,20 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>1</td><td>Burger</td><td>20</td>
-										<td>25</td><td>15</th><td>315</td>
+                  {% for food in foods %}
+                  <tr>
+                    <td>{{ food.id }}</td><td>{{ food.name }}</td><td>{{ food.protein }}</td>
+										<td>{{ food.carbs }}</td><td>{{ food.fats }}</td><td>{{ food.calories}}</td>
 										<td>
-											<a href="#" class="btn btn-default btn-xs">
+											<a href="{{ url_for('main.edit_food', food_id=food.id) }}" class="btn btn-default btn-xs">
 												<i class="glyphicon glyphicon-pencil"></i> Edit
 											</a> 
-											<a href="#" class="btn btn-danger btn-xs">
+											<a href="{{ url_for('main.delete_food', food_id=food.id) }}" class="btn btn-danger btn-xs">
 												<i class="glyphicon glyphicon-trash"></i> Delete
 											</a> 
 										</td>
-									</tr>
-									<tr>
-										<td>1</td><td>Burger</td><td>20</td>
-										<td>25</td><td>15</th><td>315</td>
-										<td>
-											<a href="#" class="btn btn-default btn-xs">
-												<i class="glyphicon glyphicon-pencil"></i> Edit
-											</a> 
-											<a href="#" class="btn btn-danger btn-xs">
-												<i class="glyphicon glyphicon-trash"></i> Delete
-											</a> 
-										</td>
-									</tr>
+                  </tr>
+                  {% endfor%}
 								</tbody>
 							</table>
 						</div>
