@@ -72,7 +72,7 @@ def edit_food(food_id):
     foods = Food.select()
     return render_template("add.html", foods=foods, food=food)
         
-@main.route('/view/<int:log_id>', defaults={'log_id': 1})
+@main.route('/view/<int:log_id>')
 def view(log_id):
     foods = Food.select()
     dateobj = Log.select(Log.date).where(Log.id==log_id).get()
@@ -83,7 +83,7 @@ def view(log_id):
                  .where(log_food.log_id==log_id))
     for item in log_foods:
         print(item.calories)
-    return render_template("view.html", foods=foods, date=date, log_foods=log_foods)
+    return render_template("view.html", foods=foods, date=date, log_foods=log_foods, log_id=log_id)
 
 @main.route('/create_log', methods=['POST'])
 def create_log():
@@ -91,9 +91,13 @@ def create_log():
     dateobj = datetime.strptime(date, '%Y-%m-%d')
     log, isCreated = Log.get_or_create(date=dateobj)
     if isCreated:
-        flash("dingetje")
+        flash(f"log for date {date} created")
     return redirect(url_for("main.view", log_id=log.id))
 
-@main.route('/add_food_to_log/<int:log_id>')
+@main.route('/add_food_to_log/<int:log_id>', methods=['POST'])
 def add_food_to_log(log_id):
-    pass
+    food_id = int(request.form.get('food-select'))
+    print(food_id, type(food_id))
+    food_select = Food.select().where(Food.id==food_id).get()
+    food_select.logs.add(Log.select().where(Log.id==log_id))
+    return redirect(url_for("main.view", log_id=log_id))

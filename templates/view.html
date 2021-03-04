@@ -49,15 +49,15 @@
 				<div class="col-lg-4 col-lg-offset-4">
 					<div class="panel panel-default">
 						<div class="panel-body">
-							<form action="" method="POST" role="form">
+							<form action="{{ url_for('main.add_food_to_log', log_id=log_id) }}" method="POST" role="form">
 							
 								<div class="form-group">
 									<label>Add Food</label>
 									<div class="input-group">
 									  <select class="form-control" name="food-select">         
 					                        {% for food in foods %}
-                                  <option value={{ food.id }}>{{ food.name }}</option>
-                                  {% endfor %}
+                                            <option value={{ food.id }}>{{ food.name }}</option>
+                                            {% endfor %}
 					                    </select>
 									  <span class="input-group-btn">
 										<button type="submit" class="btn btn-primary" id="add-btn">
