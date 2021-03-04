@@ -3,3 +3,4 @@ __pycache__/
 test2write
 foodtracker.db
 .gitignore
+.DS_Store
