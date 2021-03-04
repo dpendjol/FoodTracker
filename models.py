@@ -17,7 +17,7 @@ class Food(Model):
     
 class Log(Model):
     date = DateField()
-    foods = ManyToManyField(Food)
+    foods = ManyToManyField(Food, backref='logs')
     
     class Meta:
         database = db
