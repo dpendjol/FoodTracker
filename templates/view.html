@@ -84,22 +84,22 @@
 							<div class="row">
 								<div class="col-lg-3">
 									<h4 class="lean-h">
-										Protein: &nbsp;<strong class="f25">60</strong>
+										Protein: &nbsp;<strong class="f25">{{ totals['protein'] }}</strong>
 									</h4>
 								</div>
 								<div class="col-lg-3">
 									<h4 class="lean-h">
-										Carbohydrates: <strong class="f25">55</strong>
+										Carbohydrates: <strong class="f25">{{ totals['carbs'] }}</strong>
 									</h4>
 								</div>
 								<div class="col-lg-3">
 									<h4 class="lean-h">
-										Fat: <strong class="f25">55</strong>
+										Fat: <strong class="f25">{{ totals['fats'] }}</strong>
 									</h4>
 								</div>
 								<div class="col-lg-3">
 									<h4 class="lean-h">
-										Calories: <strong class="f25">955</strong>
+										Calories: <strong class="f25">{{ totals['calories'] }}</strong>
 									</h4>
 								</div>
 							</div>
@@ -118,18 +118,18 @@
 									</tr>
 								</thead>
 								<tbody>
-                  {% for item in log_foods %}
+                                    {% for item in log_foods %}
 									<tr>
 										<td>{{ item.id }}</td><td>{{ item.name }}</td><td>{{ item.protein }}
-                    </td>
+                                    </td>
 										<td>{{ item.carbs }}</td><td>{{ item.fats }}</td><td>{{ item.calories }}</td>
 										<td>
-											<a href="#" class="btn btn-danger btn-xs">
+											<a href="{{ url_for('main.delete_food_from_log', log_id=log_id, food_id=item.id) }}" class="btn btn-danger btn-xs">
 												<i class="glyphicon glyphicon-trash"></i> Delete
 											</a> 
 										</td>
 									</tr>
-                  {% endfor %}
+                                    {% endfor %}
 								</tbody>
 							</table>
 						</div>

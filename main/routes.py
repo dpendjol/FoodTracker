@@ -6,11 +6,37 @@ main = Blueprint("main", __name__)
 
 @main.route('/')
 def index():
-    return render_template("index.html")
+    logs = Log.select().order_by(Log.date.desc())
+    
+    log_info = []
+    
+    for log in logs:
+        proteins = 0
+        carbs = 0
+        fats = 0
+        calories = 0
+        
+        for food in log.foods:
+            proteins += food.protein
+            carbs += food.carbs
+            fats += food.fats
+            calories += food.calories
+        
+        log_info.append({
+            'id': log.id,
+            'date': log.date,
+            'proteins': proteins,
+            'carbs': carbs,
+            'fats': fats,
+            'calories': calories
+        })
+            
+    return render_template("index.html", logs=log_info)
 
 @main.route('/add', methods=["GET"])
 def add():
     foods = Food.select()
+    
     return render_template("add.html", foods=foods, food=None)
 
 @main.route('/add', methods=["POST"])
@@ -81,9 +107,19 @@ def view(log_id):
                  .join(log_food, 
                        on=(Food.id == log_food.food_id))
                  .where(log_food.log_id==log_id))
+    totals = {
+        'protein': 0,
+        'carbs': 0,
+        'fats': 0,
+        'calories': 0
+    }
     for item in log_foods:
-        print(item.calories)
-    return render_template("view.html", foods=foods, date=date, log_foods=log_foods, log_id=log_id)
+        totals['protein'] += item.protein
+        totals['carbs'] += item.carbs
+        totals['fats'] += item.fats
+        totals['calories'] += item.calories
+        
+    return render_template("view.html", foods=foods, date=date, log_foods=log_foods, log_id=log_id, totals=totals)
 
 @main.route('/create_log', methods=['POST'])
 def create_log():
@@ -100,4 +136,11 @@ def add_food_to_log(log_id):
     print(food_id, type(food_id))
     food_select = Food.select().where(Food.id==food_id).get()
     food_select.logs.add(Log.select().where(Log.id==log_id))
+        
+    return redirect(url_for("main.view", log_id=log_id))
+
+@main.route('/delete_food_from_log/<int:log_id>/<int:food_id>')
+def delete_food_from_log(log_id, food_id):
+    food_select = Food.select().where(Food.id==food_id).get()
+    food_select.logs.remove(Log.select().where(Log.id==log_id))
     return redirect(url_for("main.view", log_id=log_id))
