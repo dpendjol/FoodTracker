@@ -1,2 +1,5 @@
 __pycache__/
 .env
+test2write
+foodtracker.db
+.gitignore

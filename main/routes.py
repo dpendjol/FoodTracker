@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from models import Food
+from models import Food, Log, log_food
+from datetime import datetime
 
 main = Blueprint("main", __name__)
 
@@ -71,7 +72,28 @@ def edit_food(food_id):
     foods = Food.select()
     return render_template("add.html", foods=foods, food=food)
         
-@main.route('/view')
-def view():
+@main.route('/view/<int:log_id>', defaults={'log_id': 1})
+def view(log_id):
     foods = Food.select()
-    return render_template("view.html", foods=foods)
+    dateobj = Log.select(Log.date).where(Log.id==log_id).get()
+    date = dateobj.date.strftime('%B %d, %Y')
+    log_foods = (Food.select()
+                 .join(log_food, 
+                       on=(Food.id == log_food.food_id))
+                 .where(log_food.log_id==log_id))
+    for item in log_foods:
+        print(item.calories)
+    return render_template("view.html", foods=foods, date=date, log_foods=log_foods)
+
+@main.route('/create_log', methods=['POST'])
+def create_log():
+    date = request.form.get('date')
+    dateobj = datetime.strptime(date, '%Y-%m-%d')
+    log, isCreated = Log.get_or_create(date=dateobj)
+    if isCreated:
+        flash("dingetje")
+    return redirect(url_for("main.view", log_id=log.id))
+
+@main.route('/add_food_to_log/<int:log_id>')
+def add_food_to_log(log_id):
+    pass
