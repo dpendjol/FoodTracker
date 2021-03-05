@@ -1,6 +1,7 @@
 from flask import Flask
 from main.routes import main
 from extensions import db
+from datetime import datetime
 
 
 app = Flask(__name__)
