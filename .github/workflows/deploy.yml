@@ -28,5 +28,5 @@ jobs:
         source: "."
         target: "~/foodtracker"
     - name: Did it work
-      if: ${{ failure() }}
-      run: echo "it worked" 
+      if: ${{ succes() }}
+      echo "Success"

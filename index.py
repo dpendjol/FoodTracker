@@ -1,5 +1,6 @@
 from flask import Flask
 from main.routes import main
+from extensions import db
 
 
 app = Flask(__name__)
@@ -18,6 +19,10 @@ def after_request(response):
     """Close the database after each request"""
     db.close()
     return response
+
+@app.context_processor
+def inject_now():
+    return {'now': datetime.utcnow()}
 
 if __name__ == '__main__':
     pass
