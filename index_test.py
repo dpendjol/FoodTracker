@@ -1,5 +1,6 @@
 import pytest
 from index import create_app
+import json
 
 @pytest.fixture
 def client():
@@ -17,11 +18,18 @@ def test_add(client):
         assert response.status_code == 200
 
 def test_add(client):
+    mock_data = {
+                 'food-name': 'test2',
+                 'protein': 0,
+                 'carbohydrates': 0,
+                 'fat': 0
+                }
+    
     with client.test_client() as test_client:
-        test_client.post('/add', data=dict(name='test2',
-                                           proteins=0,
-                                           carbs=0,
-                                           fats=0))
-        response = test_client.get('/add')
-        print(response.data)
-        assert 2 == 2
+        response = test_client.post('/add', data=(mock_data))
+        assert response.status_code == 302
+
+def test_delete(client):
+    with client.test_client() as test_client:
+        response = test_client.get('/delete_food/7')
+        assert response.status_code == 302
