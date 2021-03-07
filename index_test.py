@@ -1,11 +1,10 @@
 import pytest
-from index import create_app
+from index import app
 import json
 
 @pytest.fixture
 def client():
-    flask_app = create_app()
-    return flask_app
+    return app
 
 def test_index(client):
     with client.test_client() as test_client:
