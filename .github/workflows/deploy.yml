@@ -1,6 +1,6 @@
 name: Deploy
 
-on: push
+on: workflow_dispatch
 
 jobs:
   build:
@@ -15,6 +15,9 @@ jobs:
       # Specify some input for this particular action
       with:
         python-version: '3.8.6'
+        run: |
+          python3 -m venv env
+          source ./env/bin/activate
     - name: Install Dependencies
       run: pip install -r requirements.txt
     - name: Run tests
@@ -38,7 +41,11 @@ jobs:
         USERNAME: ${{ secrets.USER }}
         PORT: ${{ secrets.PORT }}
         KEY: ${{ secrets.SSH_KEY }}
-        script: sudo /bin/systemctl restart foodtracker.service
+        script: |
+          python3 -m venv env
+          source ./env/bin/activate
+          pip3 install -r requirements.txt
+          sudo /bin/systemctl restart foodtracker.service
     - name: Done
       if: success()
       run: echo "Succes !! All done, enjoy"
