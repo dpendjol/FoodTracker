@@ -31,6 +31,7 @@ jobs:
         cp -r $GITHUB_WORKSPACE/ ~/foodtracker
     - name: Install everything
       run: |
+        cd ~/foodtracker
         python3 -m venv env
         source ./env/bin/activate
         pip3 install -r requirements.txt
