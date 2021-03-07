@@ -27,3 +27,11 @@ jobs:
       with:
         source: "."
         target: "~/foodtracker"
+    - name: Excecuting restart commands
+      uses: appleboy/ssh-action@master
+      with:
+        HOST: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USER }}
+        PORT: ${{ secrets.PORT }}
+        KEY: ${{ secrets.SSH_KEY }}
+        script: sudo /bin/systemctl restart foodtracker.service
