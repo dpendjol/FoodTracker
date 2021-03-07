@@ -37,6 +37,7 @@ jobs:
         source ./env/bin/activate
         pip3 install -r requirements.txt
         sudo /bin/systemctl restart foodtracker.service
+        ./check_running.sh
     - name: Done
       if: success()
       run: echo "Succes !! All done, enjoy"
