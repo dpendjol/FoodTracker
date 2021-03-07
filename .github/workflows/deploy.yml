@@ -28,7 +28,7 @@ jobs:
       run: echo $GITHUB_WORKSPACE
     - name: Copy files
       run: |
-        cp . ~/foodtracker
+        cp -r $GITHUB_WORKSPACE/ ~/foodtracker
     - name: Install everything
       run: |
         python3 -m venv env
