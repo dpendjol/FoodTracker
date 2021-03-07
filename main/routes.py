@@ -47,11 +47,12 @@ def add_post():
     carbs = request.form.get('carbohydrates')
     fats = request.form.get('fat')
     
+
     if food_id:
         result = Food.update(name=food,
-                              protein=proteins,
-                              carbs=carbs,
-                              fats=fats).where(Food.id==food_id).execute()
+                            protein=proteins,
+                            carbs=carbs,
+                            fats=fats).where(Food.id==food_id).execute()
         
         if result == 1:
             flash("Food item is updated", "succes")
@@ -60,10 +61,12 @@ def add_post():
         elif result < 1:
             flash("No item found", "error")
     else:
-        _, isCreated = Food.get_or_create(name=food,
+        test, isCreated = Food.get_or_create(name=food,
                                         defaults={'protein': proteins,
                                                     'carbs': carbs,
                                                     'fats': fats})
+        
+        print(test)
         if isCreated:
             flash("Food is created", "succes")
         else:
