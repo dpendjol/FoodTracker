@@ -24,29 +24,43 @@ jobs:
     - name: Run tests
       run: pytest
       if: success ()
-    - name: Copying files through scp
-      uses: appleboy/scp-action@master
-      env:
-        HOST: ${{ secrets.HOST }}
-        USERNAME: ${{ secrets.USER }}
-        PORT: ${{ secrets.PORT }}
-        KEY: ${{ secrets.SSH_KEY }}
-      with:
-        source: "."
-        target: "~/foodtracker"
-      if: success()
-    - name: Excecuting restart commands
-      uses: appleboy/ssh-action@master
-      with:
-        HOST: ${{ secrets.HOST }}
-        USERNAME: ${{ secrets.USER }}
-        PORT: ${{ secrets.PORT }}
-        KEY: ${{ secrets.SSH_KEY }}
-        script: |
-          python3 -m venv env
-          source ./env/bin/activate
-          pip3 install -r requirements.txt
-          sudo /bin/systemctl restart foodtracker.service
+    - name: Workspace
+      run: echo $GITHUB_WORKSPACE
+    # - name: Copy files
+    #   run: |
+    #     cp . ~/foodtracker
+    # - name: Install everything
+    #   run: |
+    #     python3 -m venv env
+    #     source ./env/bin/activate
+    #     pip3 install -r requirements.txt
+    #     sudo /bin/systemctl restart foodtracker.service
+
+
+
+    # - name: Copying files through scp
+    #   uses: appleboy/scp-action@master
+    #   env:
+    #     HOST: ${{ secrets.HOST }}
+    #     USERNAME: ${{ secrets.USER }}
+    #     PORT: ${{ secrets.PORT }}
+    #     KEY: ${{ secrets.SSH_KEY }}
+    #   with:
+    #     source: "."
+    #     target: "~/foodtracker"
+    #   if: success()
+    # - name: Excecuting restart commands
+    #   uses: appleboy/ssh-action@master
+    #   with:
+    #     HOST: ${{ secrets.HOST }}
+    #     USERNAME: ${{ secrets.USER }}
+    #     PORT: ${{ secrets.PORT }}
+    #     KEY: ${{ secrets.SSH_KEY }}
+    #     script: |
+    #       python3 -m venv env
+    #       source ./env/bin/activate
+    #       pip3 install -r requirements.txt
+    #       sudo /bin/systemctl restart foodtracker.service
     - name: Done
       if: success()
       run: echo "Succes !! All done, enjoy"
