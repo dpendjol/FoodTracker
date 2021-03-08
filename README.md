@@ -80,4 +80,4 @@ When solving this assignment the most challenging part was to name the problems 
 The report turned out bigger then expected. Hope that's no problem.
 
 ## Future learning
-By deploying a complexer project learned alot. My testing skills needs to be better. Testing works for now, but as mentioned in de problems section I don't got the hang of initializing a testing database.
+By deploying a complexer project learned alot. My testing skills needs to be better. Testing works for now, but as mentioned in de problems section I don't got the hang of initializing a testing database yet.
