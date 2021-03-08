@@ -1,6 +1,7 @@
-Name three components of your solution, explain what they are and how they relate to each other. A 'component' can be anthing from GitHub Actions or Bash to Digital Ocean and SSH.
-Discuss three problems that you encountered along the way and how you solved them.
-(optional) Anything of note that you want to share about the process of solving this assignment.
+## The deployed project can be found on:
+> http://188.166.100.51/ --> Deployment without use of appleboy/ssh and scp actions
+> http://178.128.248.135/ --> Deployment with use of appleboy/ssh and scp action
+---
 
 # CD Assignment
 
@@ -64,6 +65,7 @@ The basic configuration of the server is the
 ### **Problems**
 - The above mentioned problems didn't occur here, because I had solved them already.
 - There was a permission problem when copying the files. Solved could not find the exact cause, al the permissions where right. Made a work-a-round bij first removing the directory before copying the new information to it
+- The database file was overwritten with every new deployment due to overwriting with the testing database. Worked around this problem by before copying removing the testing database file.
 
 
 ## Extra stuff
@@ -73,5 +75,9 @@ When solving this assignment the most challenging part was to name the problems 
 - I edited the `sshd_config` to prevent a remote login for the root account and limited the login to only ssh for safety
 - I configured the UFW to only accept incoming requests on ports 22 and 80.
 - I used symbolic links to get maintain a single-source-of-truth between `sites-availible` and `sites-enabled` in de Nginx configuration
+- Tried to write tests for each route in the app.
 
 The report turned out bigger then expected. Hope that's no problem.
+
+## Future learning
+By deploying a complexer project learned alot. My testing skills needs to be better. Testing works for now, but as mentioned in de problems section I don't got the hang of initializing a testing database.
