@@ -1,6 +1,6 @@
 import pytest
 from index import create_app
-
+from models import *
 
 @pytest.fixture
 def client():
@@ -43,3 +43,23 @@ def test_delete_food(client):
         assert response.status_code == 302
         response = test_client.get('/')
         assert b'Food item is deleted' in response.data
+        
+
+def test_create_log(client):
+    with client.test_client() as test_client:
+        mock_data = {
+                     'date': '2020-02-02'
+                     }
+        response = test_client.get('/create_log', data=mock_data)
+        assert response.status_code == 405
+        response = test_client.post('/create_log', data=mock_data)
+        assert response.status_code == 302
+        response = test_client.get('/')
+        assert b'log for date 2020-02-02 created'
+
+# def test_add_food_to_log(client):
+#      = Food.insert(name="Pizza")
+#     with client.test_client() as test_client:
+#         response = test_client.get('add_food_to_log')
+#         assert response.status_code == 405
+

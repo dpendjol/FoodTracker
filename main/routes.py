@@ -143,7 +143,6 @@ def create_log():
 @main.route('/add_food_to_log/<int:log_id>', methods=['POST'])
 def add_food_to_log(log_id):
     food_id = int(request.form.get('food-select'))
-    print(food_id, type(food_id))
     food_select = Food.select().where(Food.id==food_id).get()
     food_select.logs.add(Log.select().where(Log.id==log_id))
 
