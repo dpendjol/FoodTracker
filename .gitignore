@@ -1,8 +1,9 @@
 __pycache__/
 .env
-test2write
 foodtracker.db
-.gitignore
+foodtracker.db.bak
 .pytest_cache
 .DS_Store
 notes.md
+/env
+README.md

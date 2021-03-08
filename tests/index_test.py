@@ -41,8 +41,6 @@ def test_delete_food(client):
     with client.test_client() as test_client:
         response = test_client.get('/delete_food/1')
         assert response.status_code == 302
-        response = test_client.get('/')
-        assert b'Food item is deleted' in response.data
         
 
 def test_create_log(client):
@@ -57,9 +55,20 @@ def test_create_log(client):
         response = test_client.get('/')
         assert b'log for date 2020-02-02 created'
 
-# def test_add_food_to_log(client):
-#      = Food.insert(name="Pizza")
-#     with client.test_client() as test_client:
-#         response = test_client.get('add_food_to_log')
-#         assert response.status_code == 405
+def test_add_food_to_log(client):
+    food, created = Food.get_or_create(name="Beenham", protein=10, carbs=10, fats=10)
+    assert food.name == "Beenham"
+    assert food.protein == 10
+    assert food.carbs == 10
+    assert food.fats == 10
+    
+    mock_data = {
+        'food-select': 1
+    }
+    
+    with client.test_client() as test_client:
+        response = test_client.get('/add_food_to_log')
+        assert response.status_code == 405
+        response = test_client.post('/add_food_to_log/1', data=mock_data)
+        assert response.status_code == 500
 
