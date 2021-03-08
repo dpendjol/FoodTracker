@@ -49,4 +49,4 @@ jobs:
           sudo /bin/systemctl restart foodtracker.service
     - name: Done
       if: success()
-      run: echo "Succes !! All done, enjoy"
+      run: echo "Succes !! All done, let's clean up and enjoy"
