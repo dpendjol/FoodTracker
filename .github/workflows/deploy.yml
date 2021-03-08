@@ -25,7 +25,7 @@ jobs:
       if: success ()
     - name: Copy files
       run: |
-        rm -rf ${{ secrets.HOMEDIR }}/foodtracker
+        rm -rf ${{ secrets.HOMEDIR }}/foodtracker !(*.db)
         cp -r $GITHUB_WORKSPACE/ ${{ secrets.HOMEDIR }}/foodtracker
     - name: Install everything
       run: | 
