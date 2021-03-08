@@ -26,7 +26,7 @@ jobs:
     - name: Copy files
       run: |
         cd ${{ secrets.HOMEDIR }}/foodtracker
-        rm -r !(*.db)
+        rm -r !("foodtracker.db")
         cp -r $GITHUB_WORKSPACE/ ${{ secrets.HOMEDIR }}/foodtracker
     - name: Install everything
       run: | 
