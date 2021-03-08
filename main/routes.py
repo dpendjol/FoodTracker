@@ -34,7 +34,7 @@ def index():
     return render_template("index.html", logs=log_info)
 
 @main.route('/add', methods=["GET"])
-def add():
+def add()
     foods = Food.select()
     
     return render_template("add.html", foods=foods, food=None)
