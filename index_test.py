@@ -1,9 +1,10 @@
 import pytest
-from index import app
+from index import create_app
 import json
 
 @pytest.fixture
 def client():
+    app = create_app()
     return app
 
 def test_index(client):
