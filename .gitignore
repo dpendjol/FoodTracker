@@ -5,3 +5,4 @@ foodtracker.db
 .gitignore
 .pytest_cache
 .DS_Store
+notes.md

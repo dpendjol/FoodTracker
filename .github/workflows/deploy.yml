@@ -18,10 +18,6 @@ jobs:
       # Specify some input for this particular action
       with:
         python-version: '3.8.6'
-        run: |
-          mkdir foodtracker
-          python3 -m venv foodtracker/env
-          source ./env/bin/activate
     - name: Install Dependencies
       run: pip install -r requirements.txt
     - name: Run tests
@@ -29,15 +25,15 @@ jobs:
       if: success ()
     - name: Copy files
       run: |
-        cp -r $GITHUB_WORKSPACE/ ~/foodtracker
+        rm -rf ${{ secrets.HOMEDIR }}/foodtracker
+        cp -r $GITHUB_WORKSPACE/ ${{ secrets.HOMEDIR }}/foodtracker
     - name: Install everything
-      run: |
-        cd ~/foodtracker
+      run: | 
+        cd ${{ secrets.HOMEDIR }}/foodtracker
         python3 -m venv env
         source ./env/bin/activate
         pip3 install -r requirements.txt
         sudo /bin/systemctl restart foodtracker.service
-        ./check_running.sh
     - name: Done
       if: success()
       run: echo "Succes !! All done, enjoy"
