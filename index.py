@@ -3,11 +3,12 @@ from main.routes import main
 from extensions import db
 from datetime import datetime
 
+def create_app():
+    app = Flask(__name__)
+    app.secret_key = "justakey"
 
-app = Flask(__name__)
-app.secret_key = "justakey"
-
-app.register_blueprint(main)    
+    app.register_blueprint(main)    
+    return app
   
 @app.before_request
 def before_request():
