@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from models import Food, Log, log_food
+from foodtracker.models import Food, Log, log_food
 from datetime import datetime
 
-main = Blueprint("main", __name__)
+from . import main
 
 
 @main.route('/')

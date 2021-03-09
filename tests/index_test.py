@@ -1,6 +1,6 @@
 import pytest
-from index import create_app
-from models import *
+from foodtracker import create_app
+from foodtracker.models import *
 
 @pytest.fixture
 def client():

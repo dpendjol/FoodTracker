@@ -1,4 +1,4 @@
-from extensions import db
+from foodtracker import db
 # from peewee import Model, CharField, IntegerField, DateField, ManyToManyField
 from peewee import Model, CharField, IntegerField, DateField, ManyToManyField
 
