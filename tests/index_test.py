@@ -67,7 +67,7 @@ def test_add_food_to_log(client):
     }
     
     with client.test_client() as test_client:
-        response = test_client.get('/add_food_to_log')
+        response = test_client.get('/add_food_to_log/1')
         assert response.status_code == 405
         response = test_client.post('/add_food_to_log/1', data=mock_data)
         assert response.status_code == 500
