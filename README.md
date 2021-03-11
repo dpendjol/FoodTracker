@@ -1,5 +1,5 @@
 ## The deployed project can be found on:
-> http://188.166.100.51/ --> Deployment without use of appleboy/ssh and scp actions
+> http://188.166.100.51/ --> Deployment without use of appleboy/ssh and scp actions  
 > http://178.128.248.135/ --> Deployment with use of appleboy/ssh and scp action
 ---
 
@@ -11,7 +11,7 @@ For this assignment I made use of a project that I made when watching a Youtube 
 
 - *Automaticly deploy a project (in my case the Flask project mentioned above) using Github actions and or bash scripting*
 
-The goal, like everthing in life, can be accomplished on many diverent way's. I did two of them, one with the use of 'external action scripts' and one without.
+The goal, can be accomplished on many diverent way's. I did two of them, one with the use of 'external action scripts' and one without.
 
 ## With external scripts
 
@@ -55,7 +55,7 @@ The goal, like everthing in life, can be accomplished on many diverent way's. I 
 
 ## Without external scripts
 
-The basic configuration of the server is the 
+The basic configuration of the server is the same as the version with external scripts.
 
 ### **Components**
 - Setting up runner on VPS
@@ -80,4 +80,4 @@ When solving this assignment the most challenging part was to name the problems 
 The report turned out bigger then expected. Hope that's no problem.
 
 ## Future learning
-By deploying a complexer project learned alot. My testing skills needs to be better. Testing works for now, but as mentioned in de problems section I don't got the hang of initializing a testing database yet.
+By deploying a complexer project learned alot. My testing skills needs to be better. Testing works for now, but as mentioned in de problems section I don't got the hang of initializing a testing database yet. So I used a work-a-round for now. But this is a project that I want to continue developing.
