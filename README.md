@@ -1,6 +1,9 @@
 ## The deployed project can be found on:
-> http://188.166.100.51/ --> Deployment without use of appleboy/ssh and scp actions  
-> http://178.128.248.135/ --> Deployment with use of appleboy/ssh and scp action
+[![Deploy without ssh](https://github.com/dpendjol/FoodTracker/actions/workflows/deploy.yml/badge.svg)](https://github.com/dpendjol/FoodTracker/actions/workflows/deploy.yml)
+> http://188.166.100.51/ --> Deployment without use of appleboy/ssh and scp actions and self-hosted Action Runner
+
+> [![Deploy through ssh](https://github.com/dpendjol/FoodTracker/actions/workflows/deploy_ssh.yml/badge.svg)](https://github.com/dpendjol/FoodTracker/actions/workflows/deploy_ssh.yml)
+> http://178.128.248.135/ --> Deployment with use of appleboy/ssh and scp action and Github Action Runner
 ---
 
 # CD Assignment
